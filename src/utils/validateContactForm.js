@@ -1,5 +1,5 @@
 export const validateContactForm = (values) => {
-    const errors = [];
+    const errors = {};
 
     if (!values.firstName) {
         errors.firstName = 'Required';
