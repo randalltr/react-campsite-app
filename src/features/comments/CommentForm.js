@@ -6,6 +6,19 @@ const CommentForm = ({campsiteId}) => {
     
     const [modalOpen, setModalOpen] = useState(false);
 
+    const handleSumbit = (values) => {
+        const comment = 
+            {
+                campsiteId: parseInt(campsiteId),
+                rating: values.rating,
+                author: values.author,
+                text: values.commentText
+            };
+
+        console.log(comment);
+        setModalOpen(false);
+    }
+
     return (
         <>
             <Button outline onClick={() => setModalOpen(true)}>
