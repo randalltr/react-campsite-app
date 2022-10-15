@@ -9,8 +9,9 @@ import {
     Label,
     Button
 } from 'reactstrap';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import defaultAvatar from '../../app/assets/img/unicorn.png';
+import { validateUserLoginForm } from '../../utils/validateUserLoginForm';
 
 const UserLoginForm = () => {
 
@@ -62,15 +63,22 @@ const UserLoginForm = () => {
                     <Formik 
                     initialValues={initialValues}
                     onSubmit={handleLogin}
+                    validate={validateUserLoginForm}
                     >
                         <Form>
                             <FormGroup>
                                 <Label htmlFor='username'>Username</Label>
                                 <Field id='username' name='username' placeholder='Username' className='form-control' />
+                                <ErrorMessage name='username'>
+                                    {(msg) => <p className='text-danger'>{msg}</p>}
+                                </ErrorMessage>
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor='password'>Password</Label>
                                 <Field id='password' name='password' placeholder='Password' className='form-control' />
+                                <ErrorMessage name='password'>
+                                    {(msg) => <p className='text-danger'>{msg}</p>}
+                                </ErrorMessage>
                             </FormGroup>
                             <Button type='submit' color='primary'>Login</Button>
                         </Form>
