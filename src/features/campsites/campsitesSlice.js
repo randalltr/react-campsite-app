@@ -1,5 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { CAMPSITES } from "../../app/shared/CAMPSITES";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { baseUrl } from "../../app/shared/baseURL";
+import { mapImageURL } from "../../utils/mapImageURL";
+// import { CAMPSITES } from "../../app/shared/CAMPSITES";
+
+export const fetchCampsites = createAsyncThunk(
+    'campsites/fetchCampsites',
+    async () => {
+        const response = await fetch(baseUrl + 'campsites');
+        if (!response.ok) {
+            return Promise.reject('Unable to fetch, status: ' + response.status);
+        }
+        const data = await response.json();
+        return data;
+    }
+);
 
 const initialState = {
     campsitesArray: CAMPSITES
