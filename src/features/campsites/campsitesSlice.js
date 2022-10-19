@@ -16,13 +16,30 @@ export const fetchCampsites = createAsyncThunk(
 );
 
 const initialState = {
-    campsitesArray: CAMPSITES
+    campsitesArray: [],
+    isLoading: true,
+    errMsg: ''
 };
 
 const campsitesSlice = createSlice({
     name: 'campsites',
-    initialState
-})
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [fetchCampsites.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [fetchCampsites.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.errMsg = '';
+            state.campsitesArray = mapImageURL(action.payload);
+        },
+        [fetchCampsites.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.errMsg = action.error ? action.error.message : 'Fetch failed';
+        }
+    }
+});
 
 export const campsitesReducer = campsitesSlice.reducer;
 
