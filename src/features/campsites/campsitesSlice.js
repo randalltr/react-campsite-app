@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseUrl } from "../../app/shared/baseURL";
+import { baseUrl } from "../../app/shared/baseUrl";
 import { mapImageURL } from "../../utils/mapImageURL";
 // import { CAMPSITES } from "../../app/shared/CAMPSITES";
 
