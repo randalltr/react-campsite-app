@@ -3,9 +3,30 @@ import { Col } from 'reactstrap';
 import Comment from './Comment';
 import { selectCommentsByCampsiteId } from './commentsSlice';
 import CommentForm from './CommentForm';
+import Error from '../../components/Error';
+import Loading from '../../components/Loading';
 
 const CommentsList = ({campsiteId}) => {
     const comments = useSelector(selectCommentsByCampsiteId(campsiteId));
+
+    const isLoading = useSelector((state) => state.campsites.isLoading);
+    const errMsg = useSelector((state) => state.campsites.errMsg);
+
+    if (isLoading) {
+        return (
+            <Row>
+                <Loading />
+            </Row>
+        );
+    }
+
+    if (errMsg) {
+        return (
+            <Row>
+                <Error errMsg={errMsg} />
+            </Row>
+        );
+    }
 
     if (comments && comments.length > 0) {
         return (
