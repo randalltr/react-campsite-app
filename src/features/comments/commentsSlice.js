@@ -35,15 +35,15 @@ const commentsSlice = createSlice({
         }
     },
     extraReducers: {
-        [fetchCampsites.pending]: (state) => {
+        [fetchComments.pending]: (state) => {
             state.isLoading = true;
         },
-        [fetchCampsites.fulfilled]: (state, action) => {
+        [fetchComments.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.errMsg = '';
             state.commentsArray = action.payload;
         },
-        [fetchCampsites.rejected]: (state, action) => {
+        [fetchComments.rejected]: (state, action) => {
             state.isLoading = false;
             state.errMsg = action.error ? action.error.message : 'Fetch failed';
         }
